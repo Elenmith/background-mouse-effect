@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="background" id="background"><img src="Kula-Visiblify-3.webp" alt="Moving Image" class="animated-image"></div>
+        
+    </div>
+
+
+    <script>
+        const background = document.getElementById('background');
+        
+        let mouseX = window.innerWidth / 2;  // Początkowe położenie X
+        let mouseY = window.innerHeight / 2; // Początkowe położenie Y
+        let currentX = mouseX;
+        let currentY = mouseY;
+
+        // Aktualizacja współrzędnych kursora
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Funkcja płynnego ruchu
+        function smoothMove() {
+            currentX += (mouseX - currentX) * 0.1; // Interpolacja X (0.1 = opóźnienie)
+            currentY += (mouseY - currentY) * 0.1; // Interpolacja Y
+
+            background.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+
+            requestAnimationFrame(smoothMove); // Powtarzaj płynnie
+        }
+
+        // Uruchomienie animacji
+        smoothMove();
+    </script>
+</body>
+</html>
